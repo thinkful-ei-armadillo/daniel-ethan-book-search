@@ -14,16 +14,35 @@ class App extends Component {
     error: null, // Extra state - tells us if there was an error fetching
 };
 
-  search(term) {
+  getBooks = () => {
 
     const API_KEY = 'AIzaSyCs4fhUwUE28Lktlayaj18jIzdp1QpTd4Y';
+
+    let BASE_URL = `https://www.googleapis.com/books/v1/volumes?key=${API_KEY}`;
+
+    if (this.state.searchTerm) {
+      BASE_URL += `&q=${this.state.searchTerm}`;
+    }
+
+    if (this.state.printType) {
+      BASE_URL += `&printType=${this.state.printType}`;
+    }
+
+    if (this.state.bookType) {
+      BASE_URL += `&filter=${this.state.bookType}`;
+    }
 
     this.setState({
       loading: true,
       error: null,
     });
 
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${term}&key=${API_KEY}`)
+
+console.log(BASE_URL);
+console.log(this.state.searchTerm);
+
+
+    fetch(BASE_URL)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -45,10 +64,10 @@ class App extends Component {
       });
   }
 
-  onSearchFormSubmit(e) {
+  onSearchFormSubmit = (e) => {
     e.preventDefault();
-    this.setState({searchTerm: e.currentTarget.searchTerm.value});
-    this.search(e.currentTarget.searchTerm.value);
+    this.setState({searchTerm: e.currentTarget.searchTerm.value})
+    this.getBooks();
   }
 
   updateFilterBookType = (booktype) => {
@@ -62,7 +81,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.search();
+    this.getBooks();
   };
 
   render() {
