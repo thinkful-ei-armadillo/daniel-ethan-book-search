@@ -14,7 +14,7 @@ class App extends Component {
     error: null, // Extra state - tells us if there was an error fetching
 };
 
-  search = (term) => {
+  search(term) {
 
     const API_KEY = 'AIzaSyCs4fhUwUE28Lktlayaj18jIzdp1QpTd4Y';
 
@@ -45,10 +45,20 @@ class App extends Component {
       });
   }
 
-  onSearchFormSubmit = (e) => {
+  onSearchFormSubmit(e) {
     e.preventDefault();
     this.setState({searchTerm: e.currentTarget.searchTerm.value});
     this.search(e.currentTarget.searchTerm.value);
+  }
+
+  updateFilterBookType = (booktype) => {
+    console.log(`user has filtered for ${booktype}`);
+    this.setState({bookType: booktype})
+  }
+
+  updateFilterPrintType = (printtype) => {
+    console.log(`user has filtered for ${printtype}`);
+    this.setState({printType: printtype})
   }
 
   componentDidMount() {
@@ -63,16 +73,17 @@ class App extends Component {
         </header>
         <SearchForm
         searchTerm={this.state.searchTerm}
-        // printType={this.state.printType}
+        printType={this.state.printType}
         bookType={this.state.bookType}
         books={this.state.books}
         onSubmit={(e) => {this.onSearchFormSubmit(e) }}
-        // onFilterChange={(printType, bookType) => this.state.onFilterChange}
+        onBookTypeChange={this.updateFilterBookType}
+        onPrintTypeChange={this.updateFilterPrintType}
         />
         <SearchResults
         searchTerm={this.state.searchTerm}
-        printType={this.state.printType}
-        bookType={this.state.bookType}
+        printType={(booktype) => this.updateFilterPrintType(booktype)}
+        bookType={(printtype) => this.updateFilterBookType(printtype)}
         books={this.state.books}
         />
       </div>

@@ -17,7 +17,8 @@ class SearchForm extends Component {
         printType={this.props.printType}
         bookType={this.props.bookType}
         books={this.props.books}
-        onFilterChange={(printType, bookType) => this.props.onFilterChange}
+        onBookTypeChange={this.props.onBookTypeChange}
+        onPrintTypeChange={this.props.onPrintTypeChange}
         />
       </div>
 
@@ -32,7 +33,8 @@ SearchForm.defaultProps = {
   bookType: '',
   books: [],
   onSubmit: () => {},
-  onFilterChange: () => {},
+  onBookTypeChange: '',
+  onPrintTypeChange: ''
 }
 
 export default SearchForm;
