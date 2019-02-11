@@ -5,7 +5,3 @@ Completed:
 2. Allow filters such as type of book or whether the book is a free ebook or not
 3. Display the search result in list and optionally allow the user to click a result to see further     details of the book.
 4. Use the Google Books API to perform the search
-
-hosted link:
-
-https://thinkful-ei-armadillo.github.io/daniel-ethan-book-search/
