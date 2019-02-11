@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Filter from './Filter';
+import './SearchBar.css';
 
 class SearchForm extends Component {
 
@@ -9,9 +10,8 @@ class SearchForm extends Component {
     return (
       <div className="searchBar">
         <form onSubmit={this.props.onSubmit}>
-          <label htmlFor="searchTerm">Search:</label><br/>
-          <input type="text" id="searchTerm" required></input>
-          <input type="submit" value="Search" />
+          <input type="text" id="searchTerm" placeholder="Search..." required></input>
+          <input type="submit" value="Search" className="submit-button" />
         </form>
         <Filter
         printType={this.props.printType}

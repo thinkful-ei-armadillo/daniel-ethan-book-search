@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './SearchResults.css';
 
 class SearchResults extends Component {
 
@@ -8,7 +8,7 @@ class SearchResults extends Component {
     console.log(this.props.books)
 
     if ( !this.props.books.items ) {
-      return <p>Please retry your search</p>
+      return <p>Please submit a valid search.</p>
     }
 
     const booksResult = this.props.books.items.map( book => {
@@ -39,8 +39,6 @@ class SearchResults extends Component {
 
     return (
       <div className="searchResults">
-
-        {/* map the books array into individual search results */}
         {booksResult}
       </div>
     );

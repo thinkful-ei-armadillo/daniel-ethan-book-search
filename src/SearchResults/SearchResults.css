@@ -1,0 +1,39 @@
+.searchResults {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.bookresult {
+  margin-top: 30px;
+}
+
+h3 {
+  color: #333;
+  text-shadow: 1px 1px rgb(252, 252, 252);
+}
+
+h4 {
+  color: #444;
+}
+
+p {
+  margin-top: 50px;
+  font-weight: 600;
+  color: #333;
+}
+
+.bookresult > p {
+  color: #111;
+  margin: 10px;
+  width: 60%;
+  text-align: left;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+.bookresult > img {
+  border: 1px solid #444;
+  border-radius: 4px;
+  box-shadow: 2px 2px #999;
+  margin: 15px;
+}

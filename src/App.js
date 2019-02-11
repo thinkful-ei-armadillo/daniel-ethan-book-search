@@ -92,15 +92,11 @@ expandClickedBook = (id) => {
       });
   }
 
-  componentDidMount() {
-    // this.getBooks();
-  };
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Google Book Search</h1>
+          <h1><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" /> Book Search</h1>
         </header>
         <SearchForm
         searchTerm={this.state.searchTerm}
