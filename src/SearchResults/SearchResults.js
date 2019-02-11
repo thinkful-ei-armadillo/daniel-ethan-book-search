@@ -8,9 +8,9 @@ class SearchResults extends Component {
 
     return (
       <div className="searchResults">
-        
+
         {/* map the books array into individual search results */}
-        <p>{this.props.books}</p>
+        {/* <p>{this.props.books}</p> */}
       </div>
     );
   }
