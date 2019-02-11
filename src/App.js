@@ -12,24 +12,52 @@ class App extends Component {
     printType: '',
     bookType: '',
     error: null, // Extra state - tells us if there was an error fetching
+    expandedId: ''
 };
 
-  getBooks = () => {
+onSearchFormSubmit = (e) => {
+  e.preventDefault();
+  this.setState({searchTerm: e.currentTarget.searchTerm.value})
+  console.log(this.state.searchTerm);
+  this.getBooks(e.currentTarget.searchTerm.value, null, null);
+}
 
-    const API_KEY = 'AIzaSyCs4fhUwUE28Lktlayaj18jIzdp1QpTd4Y';
+updateFilterBookType = (booktype) => {
+  console.log(`user has filtered for ${booktype}`);
+  this.setState({bookType: booktype})
+  this.getBooks(null, null, booktype);
+}
 
-    let BASE_URL = `https://www.googleapis.com/books/v1/volumes?key=${API_KEY}`;
+updateFilterPrintType = (printtype) => {
+  console.log(`user has filtered for ${printtype}`);
+  this.setState({printType: printtype})
+  this.getBooks(null, printtype, null)
+}
 
-    if (this.state.searchTerm) {
-      BASE_URL += `&q=${this.state.searchTerm}`;
+expandClickedBook = (id) => {
+  this.setState({ 
+    expandedId: id,
+  })
+  console.log(this.state.expandedId);
+  
+}
+
+  getBooks = (term, printtype, booktype) => {
+
+    const API_KEY = 'key=AIzaSyCs4fhUwUE28Lktlayaj18jIzdp1QpTd4Y';
+
+    let BASE_URL = `https://www.googleapis.com/books/v1/volumes?`;
+
+    if (term) {
+      BASE_URL += `&q=${term}`;
     }
 
-    if (this.state.printType) {
-      BASE_URL += `&printType=${this.state.printType}`;
+    if (printtype) {
+      BASE_URL += `q=${this.state.searchTerm}&printType=${printtype}`;
     }
 
-    if (this.state.bookType) {
-      BASE_URL += `&filter=${this.state.bookType}`;
+    if (booktype) {
+      BASE_URL += `q=${this.state.searchTerm}&filter=${booktype}`;
     }
 
     this.setState({
@@ -38,8 +66,8 @@ class App extends Component {
     });
 
 
-console.log(BASE_URL);
-console.log(this.state.searchTerm);
+    console.log(BASE_URL);
+    console.log(this.state.searchTerm);
 
 
     fetch(BASE_URL)
@@ -64,24 +92,8 @@ console.log(this.state.searchTerm);
       });
   }
 
-  onSearchFormSubmit = (e) => {
-    e.preventDefault();
-    this.setState({searchTerm: e.currentTarget.searchTerm.value})
-    this.getBooks();
-  }
-
-  updateFilterBookType = (booktype) => {
-    console.log(`user has filtered for ${booktype}`);
-    this.setState({bookType: booktype})
-  }
-
-  updateFilterPrintType = (printtype) => {
-    console.log(`user has filtered for ${printtype}`);
-    this.setState({printType: printtype})
-  }
-
   componentDidMount() {
-    this.getBooks();
+    // this.getBooks();
   };
 
   render() {
@@ -104,6 +116,8 @@ console.log(this.state.searchTerm);
         printType={(booktype) => this.updateFilterPrintType(booktype)}
         bookType={(printtype) => this.updateFilterBookType(printtype)}
         books={this.state.books}
+        onClick={(id) => {this.expandClickedBook(id)}}
+        expandedId={this.state.expandedId}
         />
       </div>
     );

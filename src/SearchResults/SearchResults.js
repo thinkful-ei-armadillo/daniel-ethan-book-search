@@ -12,13 +12,28 @@ class SearchResults extends Component {
     }
 
     const booksResult = this.props.books.items.map( book => {
+      if (this.props.expandedId === book.id) {
+         return (
+         <div className="bookresult">
+            <h3>{book.volumeInfo.title}</h3>
+            <h4>{book.volumeInfo.authors.join(', ')}</h4>
+            <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book image" /><br/>
+            <p>{book.volumeInfo.description}</p>
+            <button onClick={() => this.props.onClick(book.id)}>Details</button>
+            
+          </div>
+        )
+      }
+      else {
       return (
         <div className="bookresult">
-        <h3>{book.volumeInfo.title}</h3>
-        <p>{book.volumeInfo.description}</p>
+          <h3>{book.volumeInfo.title}</h3>
+          <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="book image" /><br/>
+          <button onClick={() => this.props.onClick(book.id)}>Details</button>
+          
       </div>
       )
-      
+    }
     });
     
 

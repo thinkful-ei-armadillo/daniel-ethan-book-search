@@ -4,11 +4,15 @@ import React, { Component } from 'react';
 class Filter extends Component {
   
   onBookTypeChange = (e) => {
-    return this.props.onBookTypeChange(e.currentTarget.value);
+    if (e.currentTarget.value) {
+    return this.props.onBookTypeChange(e.currentTarget.value)
+  };
   }
 
   onPrintTypeChange = (e) => {
+    if (e.currentTarget.value) {
     return this.props.onPrintTypeChange(e.currentTarget.value);
+  }
   }
 
   render () {
